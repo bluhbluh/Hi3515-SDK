@@ -1,0 +1,13 @@
+include $(PWD)/../Makefile.param
+
+obj-m := wdt.o
+wdt-y += hi_wdt.o 
+
+EXTRA_CFLAGS += -D$(HI_FPGA)-D$(CHIP_ARCH)
+EXTRA_CFLAGS+=-I$(PWD)/
+
+default:
+	@make -C $(LINUXROOT) M=$(PWD) modules 
+clean: 
+	@make -C $(LINUXROOT) M=$(PWD) clean 
+

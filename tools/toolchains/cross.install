@@ -1,0 +1,83 @@
+#!/bin/sh
+
+TOP_DIR=/opt/hisi-linux/x86-arm
+BIN_DIR=$TOP_DIR/gcc-3.4.3-uClibc-0.9.28/usr/bin
+TOOLS_PKG="`dirname $0`/gcc-3.4.3-uClibc-0.9.28.tar.bz2"
+
+set +e
+
+#distcc >&-
+#[ $? == 0 ] && BIN_DIR=$TOP_DIR/gcc-3.4.3-uClibc-0.9.28/usr/dist
+
+if [ -z "$1" ] 
+then
+	echo "CROSS_COMPILER_PATH=$BIN_DIR"
+
+	if [ -d $BIN_DIR ]
+	then
+		echo "Cross Tools has been installed yet!" >&2
+		exit 0
+	fi
+
+	eval $0 force
+	[ $? == 0 ] && exit 0
+
+	echo "sorry, you must have super privilege!" >&2
+	select choose in 'I have root passwd' 'I have sudo privilege' 'Try again' 'Ignore' 'Aboart' 
+	do
+		case $choose in
+		*root*)
+			su -c "$0 force"
+			[ $? == 0 ] && break
+			;;
+		*sudo*)
+			sudo $0 force
+			[ $? == 0 ] && break
+			;;
+		Try*)
+			eval $0 force
+			[ $? == 0 ] && break
+			;;
+		Ignore)
+			exit 0
+			;;
+		Aboart)
+			exit 1
+			;;
+		*)
+			echo "Invalid select, please try again!" >&2
+			continue
+			;;
+		esac
+
+		echo "Install cross tools failed!"
+	done
+
+	exit 0
+fi
+
+mkdir -pv $TOP_DIR
+[ $? != 0 ] && exit 1
+
+echo "Extract cross tools ..." >&2
+tar -xjf $TOOLS_PKG -C $TOP_DIR
+[ $? != 0 ] && exit 1
+
+if [ -z "`grep "$BIN_DIR" < /etc/profile`" ] ;
+then
+	echo "export path $BIN_DIR" >&2
+	cat >> /etc/profile << EOF
+
+# `date`
+# Hisilicon Linux, Cross-Toolchain PATH
+export PATH="$BIN_DIR:\$PATH" 
+# 
+
+EOF
+	[ $? != 0 ] && exit 1
+else
+	echo "skip export toolchains path" >&2
+fi
+
+exit 0
+

@@ -1,0 +1,155 @@
+#!/bin/sh
+source scripts/common.sh
+
+ECHO "Unpacking SDK" COLOR_YELLOW
+
+ECHO ""
+WARN "ALL THE SOUCE FILES WILL BE OVERWRITED, FILES YOU MOTIFIED WILL BE LOST !!!"
+ECHO "警告：所有源代码将被覆盖，所有你修改过的文件将会丢失 ！！！" COLOR_YELLOW
+ECHO ""
+
+ECHO "To continue, type 'Yes' and then press ENTER ..."
+ECHO "请输入'Yes'并回车以继续..."
+
+read choice
+[ x$choice != xYes ] && exit 1
+
+set +e
+
+ECHO "install cross toolchain"
+./tools/toolchains/cross.install
+
+ECHO "unpacking source/lib/ncurses-5.5"
+mkdir -pv source/lib
+run_command_progress_float "tar -xvzf pub/tarball/ncurses-5.5.tgz -C source/lib/" 0 	"tar -tzf pub/tarball/ncurses-5.5.tgz | wc -l"
+
+ECHO "unpacking source/lib/expat-1.95.8"
+mkdir -pv source/lib
+run_command_progress_float "tar -xvzf pub/tarball/expat-1.95.8.tgz -C source/lib/" 0 	"tar -tzf pub/tarball/expat-1.95.8.tgz | wc -l"
+
+ECHO "unpacking source/lib/pcre-7.2"
+mkdir -pv source/lib
+run_command_progress_float "tar -xvzf pub/tarball/pcre-7.2.tgz -C source/lib/" 0 	"tar -tzf pub/tarball/pcre-7.2.tgz | wc -l"
+
+ECHO "unpacking source/lib/zlib-1.2.3"
+mkdir -pv source/lib
+run_command_progress_float "tar -xvzf pub/tarball/zlib-1.2.3.tgz -C source/lib/" 0 	"tar -tzf pub/tarball/zlib-1.2.3.tgz | wc -l"
+
+ECHO "unpacking source/lib/binutils-2.18"
+mkdir -pv source/lib
+run_command_progress_float "tar -xvzf pub/tarball/binutils-2.18.tgz -C source/lib/" 0 	"tar -tzf pub/tarball/binutils-2.18.tgz | wc -l"
+
+ECHO "unpacking source/lib/popt-1.7"
+mkdir -pv source/lib
+run_command_progress_float "tar -xvzf pub/tarball/popt-1.7.tgz -C source/lib/" 0 	"tar -tzf pub/tarball/popt-1.7.tgz | wc -l"
+
+ECHO "unpacking source/lib/termcap-2.0.8"
+mkdir -pv source/lib
+run_command_progress_float "tar -xvzf pub/tarball/termcap-2.0.8.tgz -C source/lib/" 0 	"tar -tzf pub/tarball/termcap-2.0.8.tgz | wc -l"
+
+ECHO "unpacking source/lib/dmalloc-5.5.2"
+mkdir -pv source/lib
+run_command_progress_float "tar -xvzf pub/tarball/dmalloc-5.5.2.tgz -C source/lib/" 0 	"tar -tzf pub/tarball/dmalloc-5.5.2.tgz | wc -l"
+
+ECHO "unpacking source/app/gdb-6.8"
+mkdir -pv source/app
+run_command_progress_float "tar -xvzf pub/tarball/gdb-6.8.tgz -C source/app/" 0 	"tar -tzf pub/tarball/gdb-6.8.tgz | wc -l"
+
+ECHO "unpacking source/app/mtd-utils-1.0.0"
+mkdir -pv source/app
+run_command_progress_float "tar -xvzf pub/tarball/mtd-utils-1.0.0.tgz -C source/app/" 0 	"tar -tzf pub/tarball/mtd-utils-1.0.0.tgz | wc -l"
+
+ECHO "unpacking source/app/dosfstools-2.11"
+mkdir -pv source/app
+run_command_progress_float "tar -xvzf pub/tarball/dosfstools-2.11.tgz -C source/app/" 0 	"tar -tzf pub/tarball/dosfstools-2.11.tgz | wc -l"
+
+ECHO "unpacking source/app/reg-tools-1.0.0"
+mkdir -pv source/app
+run_command_progress_float "tar -xvzf pub/tarball/reg-tools-1.0.0.tgz -C source/app/" 0 	"tar -tzf pub/tarball/reg-tools-1.0.0.tgz | wc -l"
+
+ECHO "unpacking source/app/ltt-control-0.47"
+mkdir -pv source/app
+run_command_progress_float "tar -xvzf pub/tarball/ltt-control-0.47.tgz -C source/app/" 0 	"tar -tzf pub/tarball/ltt-control-0.47.tgz | wc -l"
+
+ECHO "unpacking source/app/memstat-0.4"
+mkdir -pv source/app
+run_command_progress_float "tar -xvzf pub/tarball/memstat-0.4.tgz -C source/app/" 0 	"tar -tzf pub/tarball/memstat-0.4.tgz | wc -l"
+
+ECHO "unpacking source/app/udev-100"
+mkdir -pv source/app
+run_command_progress_float "tar -xvzf pub/tarball/udev-100.tgz -C source/app/" 0 	"tar -tzf pub/tarball/udev-100.tgz | wc -l"
+
+ECHO "unpacking source/os/busybox-1.1.2"
+mkdir -pv source/os
+run_command_progress_float "tar -xvzf pub/tarball/busybox-1.1.2.tgz -C source/os/" 0 	"tar -tzf pub/tarball/busybox-1.1.2.tgz | wc -l"
+
+ECHO "unpacking source/app/procps-3.2.5"
+mkdir -pv source/app
+run_command_progress_float "tar -xvzf pub/tarball/procps-3.2.5.tgz -C source/app/" 0 	"tar -tzf pub/tarball/procps-3.2.5.tgz | wc -l"
+
+ECHO "unpacking source/app/Oprofile-0.9.4"
+mkdir -pv source/app
+run_command_progress_float "tar -xvzf pub/tarball/Oprofile-0.9.4.tgz -C source/app/" 0 	"tar -tzf pub/tarball/Oprofile-0.9.4.tgz | wc -l"
+
+ECHO "unpacking source/os/u-boot-2008.10"
+mkdir -pv source/os
+run_command_progress_float "tar -xvzf pub/tarball/u-boot-2008.10.tgz -C source/os/" 0 	"tar -tzf pub/tarball/u-boot-2008.10.tgz | wc -l"
+
+ECHO "unpacking source/os/linux-2.6.24"
+mkdir -pv source/os
+run_command_progress_float "tar -xvzf pub/tarball/linux-2.6.24.tgz -C source/os/" 0 	"tar -tzf pub/tarball/linux-2.6.24.tgz | wc -l"
+
+ECHO "unpacking source/drv/hisi-mmz"
+mkdir -pv source/drv
+run_command_progress_float "tar -xvzf pub/tarball/hisi-mmz.tgz -C source/drv/" 0 	"tar -tzf pub/tarball/hisi-mmz.tgz | wc -l"
+
+ECHO "unpacking source/drv/hisi-dma"
+mkdir -pv source/drv
+run_command_progress_float "tar -xvzf pub/tarball/hisi-dma.tgz -C source/drv/" 0 	"tar -tzf pub/tarball/hisi-dma.tgz | wc -l"
+
+ECHO "unpacking source/drv/hisi-irda"
+mkdir -pv source/drv
+run_command_progress_float "tar -xvzf pub/tarball/hisi-irda.tgz -C source/drv/" 0 	"tar -tzf pub/tarball/hisi-irda.tgz | wc -l"
+
+ECHO "unpacking source/drv/hi3515v100-sfv300"
+mkdir -pv source/drv
+run_command_progress_float "tar -xvzf pub/tarball/hi3515v100-sfv300.tgz -C source/drv/" 0 	"tar -tzf pub/tarball/hi3515v100-sfv300.tgz | wc -l"
+
+ECHO "unpacking source/drv/hi3515v100-sdio"
+mkdir -pv source/drv
+run_command_progress_float "tar -xvzf pub/tarball/hi3515v100-sdio.tgz -C source/drv/" 0 	"tar -tzf pub/tarball/hi3515v100-sdio.tgz | wc -l"
+ECHO "unpacking rootfs-FULL_REL"
+run_command_progress_float "tar -xvzf pub/tarball/rootfs-FULL_REL-ALL.tgz -C ." 	0 "tar -tzf pub/tarball/rootfs-FULL_REL-ALL.tgz | wc -l"
+pushd rootfs-FULL_REL
+./mknod_console 
+popd
+
+ECHO "unpacking pub/kbuild-FULL_REL"
+mkdir -pv pub
+run_command_progress_float "tar -xvzf pub/tarball/kbuild-FULL_REL.tgz -C pub/" 0 	"tar -tzf pub/tarball/kbuild-FULL_REL.tgz | wc -l"
+ECHO "rebuild kernel headers ..."
+pushd pub/kbuild-FULL_REL
+# make clean
+make scripts archprepare
+popd
+
+
+ECHO "unpacking tools/bin"
+mkdir -pv .
+run_command_progress_float "tar -xvzf pub/tarball/host-bins.tgz -C ./" 0 	"tar -tzf pub/tarball/host-bins.tgz | wc -l"
+
+ECHO "unpacking pub/include pub/lib"
+mkdir -pv .
+run_command_progress_float "tar -xvzf pub/tarball/libs.tgz -C ./" 0 	"tar -tzf pub/tarball/libs.tgz | wc -l"
+
+ECHO "unpacking pub/resource"
+mkdir -pv .
+run_command_progress_float "tar -xvzf pub/tarball/res.tgz -C ./" 0 	"tar -tzf pub/tarball/res.tgz | wc -l"
+
+ECHO "unpacking pub/standee"
+mkdir -pv .
+run_command_progress_float "tar -xvzf pub/tarball/standee.tgz -C ./" 0 	"tar -tzf pub/tarball/standee.tgz | wc -l"
+
+ECHO "unpacking scripts/rtsh"
+mkdir -pv .
+run_command_progress_float "tar -xvzf pub/tarball/rtsh.tgz -C ./" 0 	"tar -tzf pub/tarball/rtsh.tgz | wc -l"

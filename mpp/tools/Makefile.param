@@ -1,0 +1,53 @@
+# 2008.3.8 c42025
+# define all global environment for all samples
+#define cross compiler
+
+# used to compile release sample
+
+export CROSS:=arm-hismall-linux-
+export CC:=$(CROSS)gcc
+export AR:=$(CROSS)ar
+
+CHIP_ARCH?=hi3520
+CFLAGS := -D$(CHIP_ARCH)
+
+SDK_DIR:=$(PWD)/../..
+PUB_PATH:=$(SDK_DIR)/pub
+EXTDRV_PATH:=$(SDK_DIR)/extdrv/
+MPP_PATH:=$(PWD)/../
+LIB_PATH:=$(MPP_PATH)/lib
+COMPONENT_PATH:=$(MPP_PATH)/lib
+
+LIBS := $(LIB_PATH)/libmpi.a \
+	$(LIB_PATH)/lib_VoiceEngine.a \
+ 	$(LIB_PATH)/lib_amr_spc.a \
+	$(LIB_PATH)/lib_amr_fipop.a \
+	$(LIB_PATH)/lib_aec.a \
+	$(LIB_PATH)/lib_aacdec.a \
+	$(LIB_PATH)/lib_aacenc.a \
+	$(LIB_PATH)/libresampler.a \
+	$(LIB_PATH)/libloadbmp.a \
+	$(LIB_PATH)/libtde.a
+
+ifeq ($(CHIP_ARCH),hi3520)
+LIBS+=$(COMPONENT_PATH)/libpciv.a
+endif
+
+INC_PATH:=-I$(PUB_PATH)/include \
+	-I$(PUB_PATH)/kbuild-FULL_REL/include \
+	-I$(MPP_PATH)/include \
+	-I$(MPP_PATH)/sample/common\
+	-I$(EXTDRV_PATH)
+
+DBG?=N
+ifeq ($(DBG),Y)
+export HI_MAKE_DBG:=HI_DEBUG
+export HI_SUPPORT_GDB:=YES
+else
+export HI_MAKE_DBG:=HI_RELEASE
+endif
+
+#only kernle need this
+OSDRV:= 
+DRV_PATH:=$(SDK_DIR)/$(OSDRV)/source/drv
+LINUXROOT:=$(PUB_PATH)/kbuild-FULL_REL

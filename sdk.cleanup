@@ -1,0 +1,121 @@
+#!/bin/sh
+source scripts/common.sh
+
+ECHO "Cleanup SDK" COLOR_YELLOW	
+
+ECHO ""
+WARN "ALL THE SOUCE FILES WILL BE DELETED, FILES YOU MOTIFIED/ADDED WILL BE LOST !!!"
+ECHO ""
+
+ECHO "To continue, type 'Yes' and then press ENTER ..."
+
+read choice
+[ x$choice != xYes ] && exit 1
+
+set +e
+
+
+ECHO "cleanup source/lib/ncurses-5.5"
+run_command_progress_float "rm source/lib/ncurses-5.5 -frv" 0 "find source/lib/ncurses-5.5 | wc -l"
+
+ECHO "cleanup source/lib/expat-1.95.8"
+run_command_progress_float "rm source/lib/expat-1.95.8 -frv" 0 "find source/lib/expat-1.95.8 | wc -l"
+
+ECHO "cleanup source/lib/pcre-7.2"
+run_command_progress_float "rm source/lib/pcre-7.2 -frv" 0 "find source/lib/pcre-7.2 | wc -l"
+
+ECHO "cleanup source/lib/zlib-1.2.3"
+run_command_progress_float "rm source/lib/zlib-1.2.3 -frv" 0 "find source/lib/zlib-1.2.3 | wc -l"
+
+ECHO "cleanup source/lib/binutils-2.18"
+run_command_progress_float "rm source/lib/binutils-2.18 -frv" 0 "find source/lib/binutils-2.18 | wc -l"
+
+ECHO "cleanup source/lib/popt-1.7"
+run_command_progress_float "rm source/lib/popt-1.7 -frv" 0 "find source/lib/popt-1.7 | wc -l"
+
+ECHO "cleanup source/lib/termcap-2.0.8"
+run_command_progress_float "rm source/lib/termcap-2.0.8 -frv" 0 "find source/lib/termcap-2.0.8 | wc -l"
+
+ECHO "cleanup source/lib/dmalloc-5.5.2"
+run_command_progress_float "rm source/lib/dmalloc-5.5.2 -frv" 0 "find source/lib/dmalloc-5.5.2 | wc -l"
+
+ECHO "cleanup source/app/gdb-6.8"
+run_command_progress_float "rm source/app/gdb-6.8 -frv" 0 "find source/app/gdb-6.8 | wc -l"
+
+ECHO "cleanup source/app/mtd-utils-1.0.0"
+run_command_progress_float "rm source/app/mtd-utils-1.0.0 -frv" 0 "find source/app/mtd-utils-1.0.0 | wc -l"
+
+ECHO "cleanup source/app/dosfstools-2.11"
+run_command_progress_float "rm source/app/dosfstools-2.11 -frv" 0 "find source/app/dosfstools-2.11 | wc -l"
+
+ECHO "cleanup source/app/reg-tools-1.0.0"
+run_command_progress_float "rm source/app/reg-tools-1.0.0 -frv" 0 "find source/app/reg-tools-1.0.0 | wc -l"
+
+ECHO "cleanup source/app/ltt-control-0.47"
+run_command_progress_float "rm source/app/ltt-control-0.47 -frv" 0 "find source/app/ltt-control-0.47 | wc -l"
+
+ECHO "cleanup source/app/memstat-0.4"
+run_command_progress_float "rm source/app/memstat-0.4 -frv" 0 "find source/app/memstat-0.4 | wc -l"
+
+ECHO "cleanup source/app/udev-100"
+run_command_progress_float "rm source/app/udev-100 -frv" 0 "find source/app/udev-100 | wc -l"
+
+ECHO "cleanup source/os/busybox-1.1.2"
+run_command_progress_float "rm source/os/busybox-1.1.2 -frv" 0 "find source/os/busybox-1.1.2 | wc -l"
+
+ECHO "cleanup source/app/procps-3.2.5"
+run_command_progress_float "rm source/app/procps-3.2.5 -frv" 0 "find source/app/procps-3.2.5 | wc -l"
+
+ECHO "cleanup source/app/Oprofile-0.9.4"
+run_command_progress_float "rm source/app/Oprofile-0.9.4 -frv" 0 "find source/app/Oprofile-0.9.4 | wc -l"
+
+ECHO "cleanup source/os/u-boot-2008.10"
+run_command_progress_float "rm source/os/u-boot-2008.10 -frv" 0 "find source/os/u-boot-2008.10 | wc -l"
+
+ECHO "cleanup source/os/linux-2.6.24"
+run_command_progress_float "rm source/os/linux-2.6.24 -frv" 0 "find source/os/linux-2.6.24 | wc -l"
+
+ECHO "cleanup source/drv/hisi-mmz"
+run_command_progress_float "rm source/drv/hisi-mmz -frv" 0 "find source/drv/hisi-mmz | wc -l"
+
+ECHO "cleanup source/drv/hisi-dma"
+run_command_progress_float "rm source/drv/hisi-dma -frv" 0 "find source/drv/hisi-dma | wc -l"
+
+ECHO "cleanup source/drv/hisi-irda"
+run_command_progress_float "rm source/drv/hisi-irda -frv" 0 "find source/drv/hisi-irda | wc -l"
+
+ECHO "cleanup source/drv/hi3515v100-sfv300"
+run_command_progress_float "rm source/drv/hi3515v100-sfv300 -frv" 0 "find source/drv/hi3515v100-sfv300 | wc -l"
+
+ECHO "cleanup source/drv/hi3515v100-sdio"
+run_command_progress_float "rm source/drv/hi3515v100-sdio -frv" 0 "find source/drv/hi3515v100-sdio | wc -l"
+ECHO "cleanup rootfs-FULL_REL"
+run_command_progress_float "rm rootfs-FULL_REL -frv" 0 "find rootfs-FULL_REL | wc -l"
+
+ECHO "cleanup pub/kbuild-FULL_REL"
+run_command_progress_float "rm pub/kbuild-FULL_REL -frv" 0 "find pub/kbuild-FULL_REL | wc -l"
+
+ECHO "cleanup tools/bin"
+pushd .
+run_command_progress_float "rm tools/bin -frv" 0 "find tools/bin | wc -l"
+popd
+
+ECHO "cleanup pub/include pub/lib"
+pushd .
+run_command_progress_float "rm pub/include pub/lib -frv" 0 "find pub/include pub/lib | wc -l"
+popd
+
+ECHO "cleanup pub/resource"
+pushd .
+run_command_progress_float "rm pub/resource -frv" 0 "find pub/resource | wc -l"
+popd
+
+ECHO "cleanup pub/standee"
+pushd .
+run_command_progress_float "rm pub/standee -frv" 0 "find pub/standee | wc -l"
+popd
+
+ECHO "cleanup scripts/rtsh"
+pushd .
+run_command_progress_float "rm scripts/rtsh -frv" 0 "find scripts/rtsh | wc -l"
+popd

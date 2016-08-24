@@ -1,0 +1,52 @@
+#define all environent varibables,including compliler tools, director of os and driver source #you need to modify the following line according where you install the sdk.
+
+SDK_DIR?=$(PWD)/../..
+
+KDBG?=N
+DBG?=N
+FPGA?=N
+SLAVE?=N
+KDBG_SUFFIX:=-FULL_REL
+
+ifeq ($(KDBG),Y)
+KDBG_SUFFIX:=-FULL_DBG
+endif
+
+ifeq ($(KDBG),L)
+KDBG_SUFFIX:=-LESS_REL
+endif
+
+ifeq ($(FPGA),Y)
+FPGA_SUFFIX:=.fpga
+export HI_FPGA:=HI_FPGA
+else
+export HI_FPGA:=HI_XXXX
+endif
+
+ifeq ($(SLAVE),Y)
+KDBG_CPU_MODE:=_SLAVE
+endif
+
+export LINUXROOT:=$(SDK_DIR)/pub/kbuild$(KDBG_SUFFIX)$(KDBG_CPU_MODE)
+EXTRA_CFLAGS += -I$(PWD)/../gpio-i2c -I$(PWD)/../gpio-i2c1
+
+ifeq ($(DBG),Y)
+export HI_MAKE_DBG:=HI_DEBUG
+export HI_SUPPORT_GDB:=YES
+else
+export HI_MAKE_DBG:=HI_RELEASE
+endif
+
+#where cc can find header files of mmz and peripheral diveces' driver
+export USER_INC:=$(LINUXROOT)/include/kcom
+export USER_INC:=$(LINUXROOT)/include/
+
+#define cross compiler
+HIL_CONFIG_FILE:=$(LINUXROOT)/.hil_config
+export CROSS:= $(shell if [ -f $(HIL_CONFIG_FILE) ]; then \
+			cat $(HIL_CONFIG_FILE) | grep CROSS_COMPILE= | sed -n s/CROSS_COMPILE=//p; \
+		fi)
+
+export CC:=$(CROSS)gcc
+export AR:=$(CROSS)ar
+

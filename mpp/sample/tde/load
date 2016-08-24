@@ -1,0 +1,17 @@
+if [ $# -eq 0 ]
+then
+echo "${COLOR_RED}Please input load parameter,such as './load hi3520' or './load hi3515'${COLOR_NORMAL}"
+fi
+
+if [ "$1" = "hi3520" ]
+then
+rmmod hifb
+insmod ../../ko/hifb.ko video="hifb:vram3_size:8000000"
+fi
+
+if [ "$1" = "hi3515" ]
+then
+rmmod hifb
+insmod ../../ko/hifb.ko video="hifb:vram2_size:8000000"
+fi
+

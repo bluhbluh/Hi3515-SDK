@@ -1,0 +1,98 @@
+#!/bin/sh
+# Useage: load [ -r ] [ -i ]
+#         -r : rmmod all modules
+#         -i : insmod all modules
+#    default : rmmod all moules and then insmod them
+#
+# It is release load script.
+
+EXTDRV_DIR=./extdrv/
+HIFB_DIR=./
+TDE_DIR=./
+
+insert_ko()
+{
+    modprobe mmz mmz=anonymous,0,0xC4000000,192M anony=1;
+    modprobe fb
+    insmod $EXTDRV_DIR/hidmac.ko
+    insmod $EXTDRV_DIR/gpioi2c.ko
+    insmod $EXTDRV_DIR/tw2865.ko chips=2
+    insmod $HIFB_DIR/hifb.ko video="hifb:vram0_size=4000000,vram1_size=2000000,vram2_size=2000000,vram3_size=2000000,vram4_size=2000000"
+    insmod $TDE_DIR/tde.ko
+    insmod hi3515_base.ko
+    insmod hi3515_sys.ko
+    insmod hi3515_dsu.ko
+    insmod hi3515_vd.ko
+    insmod hi3515_vou.ko
+    insmod hi3515_viu.ko
+    insmod hi3515_chnl.ko
+    insmod hi3515_vdec.ko nc_alg=1
+    insmod hi3515_venc.ko
+    insmod hi3515_group.ko
+    insmod hi3515_vpp.ko
+    insmod hi3515_md.ko
+    insmod hi3515_h264e.ko
+    insmod hi3515_h264d.ko
+    insmod hi3515_jpege.ko
+    insmod hi3515_jpegd.ko
+    insmod hi3515_sio.ko
+    insmod hi3515_ai.ko
+    insmod hi3515_ao.ko
+    insmod hi3515_aenc.ko
+    insmod hi3515_adec.ko
+}
+
+remove_ko()
+{
+	rmmod hi3515_adec
+    rmmod hi3515_aenc
+    rmmod hi3515_ai
+    rmmod hi3515_ao
+    rmmod hi3515_sio
+	rmmod hi3515_jpegd
+	rmmod hi3515_jpege
+	rmmod hi3515_h264d
+	rmmod hi3515_h264e
+	rmmod hi3515_md
+	rmmod hi3515_vpp
+	rmmod hi3515_vdec
+	rmmod hi3515_venc
+	rmmod hi3515_group
+	rmmod hi3515_chnl
+	rmmod hi3515_dsu
+    rmmod hi3515_vou
+    rmmod hi3515_vd
+    rmmod hi3515_viu
+	rmmod hi3515_sys
+	rmmod hi3515_base
+	rmmod hifb
+	rmmod tde
+	rmmod tw2865
+	#rmmod adv_7441
+	rmmod gpioi2c
+	rmmod hidmac
+	rmmod fb
+	rmmod mmz
+}
+
+# Use "sh xxx" can execute script even it has no executable attribute.
+# !!! Must execute before insert module. For pin-multiplexing is configed here.
+sh ./sysctl_hi3515.sh
+
+# load module.
+if [ "$1" = "-i" ]
+then
+	insert_ko
+fi
+
+if [ "$1" = "-r" ]
+then
+	remove_ko
+fi
+
+if [ $# -eq 0 ]
+then
+	remove_ko
+	insert_ko
+fi
+
